@@ -33,7 +33,7 @@ $ sh flash-kb.sh
 ```
 $ sh flash-usb.sh
 ```
-- Uncomment line 39 in [ir-remote.ino](./ir-remote.ino) to see ir codes from your remote controller in Serial Monitor, but **remember to comment after development or it might crash your computer**
+- Uncomment line 39 in [ir-remote.ino](./ir-remote.ino) to see ir codes from your remote controller in Serial Monitor, but **remember to comment this line after development or it might crash your computer**
 - Repeat steps in installation
 
 ## Reference
