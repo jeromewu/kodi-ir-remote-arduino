@@ -1,15 +1,15 @@
 #include <IRremote.h>
 
-#define IR_RIGHT    0xE9B51828
-#define IR_LEFT     0xA574865B
-#define IR_UP       0x3E0C7005
-#define IR_DOWN     0x503D6F71
-#define IR_ENTER    0x25D2E369
-#define IR_PLAY     0xC578C8FD  //Space  play
-#define IR_STOP     0x9FFBF334  //x      0
-#define IR_ESC      0x6463F65D  //Esc
-#define IR_VOL_DOWN 0x47071827
-#define IR_VOL_UP   0xAA849FD1
+#define IR_RIGHT    0x21035431
+#define IR_LEFT     0x983AB4C1
+#define IR_UP       0xC20370A1
+#define IR_DOWN     0x81930A09
+#define IR_ENTER    0xBB0ED9E1
+#define IR_PLAY     0x68E839F1  //Space  play
+#define IR_STOP     0xE01F9A81  //x      0
+#define IR_ESC      0xE8EDC338  //Esc
+#define IR_VOL_DOWN 0x240C9161
+#define IR_VOL_UP   0xA26409C9
 
 #define KEY_UP_ARROW       82
 #define KEY_DOWN_ARROW     81
