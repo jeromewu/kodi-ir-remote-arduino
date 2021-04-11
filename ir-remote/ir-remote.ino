@@ -1,22 +1,22 @@
 #include <IRremote.h>
 
-#define IR_RIGHT    0x807F827D
-#define IR_LEFT     0x807F42BD
-#define IR_UP       0x807FE817
-#define IR_DOWN     0x807F58A7
-#define IR_ENTER    0x807FA857
-#define IR_PLAY     0x807F08F7  //Space  play
-#define IR_STOP     0x807FEA15  //x      0
-#define IR_ESC      0x807F6897  //Esc
+#define IR_RIGHT    0xF80700DF
+#define IR_LEFT     0xB84700DF
+#define IR_UP       0xE51A00DF
+#define IR_DOWN     0xB74800DF
+#define IR_ENTER    0xF90600DF
+#define IR_PLAY     0xA55A00DF  //Space  play
+#define IR_STOP     0xA25D00DF  //x      0
+#define IR_ESC      0xF50A00DF  //Esc
 /*
  *#define IR_VOL_DOWN 0x240C9161
  *#define IR_VOL_UP   0xA26409C9
  */
 
-#define IR_INTERNAL_MONITOR_ONLY   0x807F22DD
-#define IR_EXTERNAL_MONITOR_ONLY   0x807FA25D
-#define IR_START_KODI              0x807FE21D
-#define IR_OUTPUT_AUDIO            0x807F629D
+#define IR_INTERNAL_MONITOR_ONLY   0xA95600DF
+#define IR_EXTERNAL_MONITOR_ONLY   0xA85700DF
+#define IR_START_KODI              0xA45B00DF
+#define IR_OUTPUT_AUDIO            0xE01F00DF
 
 #define KEY_UP_ARROW       82
 #define KEY_DOWN_ARROW     81
@@ -54,19 +54,20 @@ const uint8_t MODIFIER_MASKS[8] = {
   B10000000
 };
 IRrecv irrecv(RECV_PIN);
-decode_results results;
+// decode_results results;
 uint8_t buf[8] = { 0 };
 
 void setup(){
-  Serial.begin(9600);
+  pinMode(13, OUTPUT);
   irrecv.enableIRIn();
-  irrecv.blink13(true);
+  Serial.begin(9600);
+  // irrecv.blink13(true);
 }
 
 void loop(){
-  if (irrecv.decode(&results)){
+  if (irrecv.decode()){
     int mods[] = {LEFT_ALT, LEFT_CTRL};
-    unsigned long code = results.value;
+    unsigned long code = irrecv.decodedIRData.decodedRawData;
     //Serial.println(code, HEX);
     switch(code) {
       case IR_UP:
