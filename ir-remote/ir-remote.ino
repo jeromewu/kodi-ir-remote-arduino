@@ -7,7 +7,10 @@
 #define IR_ENTER    0xF90600DF
 #define IR_PLAY     0xA55A00DF  //Space  play
 #define IR_STOP     0xA25D00DF  //x      0
-#define IR_ESC      0xF50A00DF  //Esc
+#define IR_ESC      0xE81700DF  //Esc
+#define IR_EXIT     0xFC0300DF  //Alt+F4
+#define IR_BS       0xF50A00DF  //Backspace
+#define IR_MENU     0xE71800DF  //c
 /*
  *#define IR_VOL_DOWN 0x240C9161
  *#define IR_VOL_UP   0xA26409C9
@@ -32,6 +35,9 @@
 #define KEY_2              31 
 #define KEY_K              14
 #define KEY_A              4
+#define KEY_C              6
+#define KEY_F4             61
+#define KEY_BS             42
 
 #define LEFT_CTRL   0
 #define LEFT_SHIFT  1
@@ -56,6 +62,8 @@ const uint8_t MODIFIER_MASKS[8] = {
 IRrecv irrecv(RECV_PIN);
 // decode_results results;
 uint8_t buf[8] = { 0 };
+int altAndCtrl[] = {LEFT_ALT, LEFT_CTRL};
+int alt[] = {LEFT_ALT};
 
 void setup(){
   pinMode(13, OUTPUT);
@@ -66,7 +74,6 @@ void setup(){
 
 void loop(){
   if (irrecv.decode()){
-    int mods[] = {LEFT_ALT, LEFT_CTRL};
     unsigned long code = irrecv.decodedIRData.decodedRawData;
     //Serial.println(code, HEX);
     switch(code) {
@@ -94,17 +101,26 @@ void loop(){
       case IR_ESC:
         sendKey(KEY_ESC, 0, 0);
         break;
+      case IR_MENU:
+        sendKey(KEY_C, 0, 0);
+        break;
+      case IR_BS:
+        sendKey(KEY_BS, 0, 0);
+        break;
       case IR_INTERNAL_MONITOR_ONLY:
-        sendKey(KEY_1, mods, 2);
+        sendKey(KEY_1, altAndCtrl, 2);
         break;
       case IR_EXTERNAL_MONITOR_ONLY:
-        sendKey(KEY_2, mods, 2);
+        sendKey(KEY_2, altAndCtrl, 2);
         break;
       case IR_START_KODI:
-        sendKey(KEY_K, mods, 2);
+        sendKey(KEY_K, altAndCtrl, 2);
         break;
       case IR_OUTPUT_AUDIO:
-        sendKey(KEY_A, mods, 2);
+        sendKey(KEY_A, altAndCtrl, 2);
+        break;
+      case IR_EXIT:
+        sendKey(KEY_F4, alt, 1);
         break;
       /*
        *case IR_VOL_DOWN:
